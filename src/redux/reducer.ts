@@ -13,6 +13,7 @@ export enum Actions {
   loginUser = "LOGIN_USER",
   getUserDate = "GET_USER_DATA",
   showError = "SHOW_ERROR",
+  showLoading = "SHOW_LOADING",
 }
 
 export const reducer = (state: IState = initialState, action: IAction) => {
@@ -22,6 +23,13 @@ export const reducer = (state: IState = initialState, action: IAction) => {
 
       return {
         error,
+        ...state,
+      };
+    }
+
+    case Actions.showLoading: {
+      return {
+        isLoading: true,
         ...state,
       };
     }

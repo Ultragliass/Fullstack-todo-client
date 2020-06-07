@@ -10,6 +10,11 @@ export const loginUserAction = (
   password: string
 ): Function => {
   return async (dispatch: Dispatch<IAction>) => {
+    dispatch({
+      type: Actions.showLoading,
+      payload: {},
+    });
+
     try {
       const response = await axios.post(`${BASE_LINK}/login`, {
         username,
@@ -42,6 +47,11 @@ export const registerUserAction = (
   password: string
 ): Function => {
   return async (dispatch: Dispatch<IAction>) => {
+    dispatch({
+      type: Actions.showLoading,
+      payload: {},
+    });
+
     try {
       const response = await axios.post(`${BASE_LINK}/register`, {
         username,
