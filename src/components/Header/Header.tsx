@@ -6,7 +6,7 @@ export class Header extends PureComponent {
     const { children } = this.props;
 
     return (
-      <Row className="justify-content-center">
+      <Row className="justify-content-center mt-5 mb-5">
         <Col lg={12} className="text-center">
           <h1>{children}</h1>
         </Col>
