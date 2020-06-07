@@ -1,8 +1,15 @@
 import React from "react";
 import "./App.css";
+import { Container } from "react-bootstrap";
 
-function App() {
-  return <div></div>;
+class App extends React.PureComponent {
+  render() {
+    return (
+    <Container className="container">
+      
+    </Container>
+    );
+  }
 }
 
 export default App;
