@@ -5,14 +5,14 @@ import "react-calendar/dist/Calendar.css";
 
 interface TodoFormProps {
   date: Date;
-  content: string;
+  description: string;
   handleDateChange(date: Date): void;
   handleInputChange(event: any): void;
 }
 
 export default class TodoForm extends PureComponent<TodoFormProps> {
   render() {
-    const { date, content } = this.props;
+    const { date, description } = this.props;
 
     return (
       <Row className="justify-content-center pt-5">
@@ -24,7 +24,7 @@ export default class TodoForm extends PureComponent<TodoFormProps> {
               as="textarea"
               rows={12}
               placeholder="What do you need to do?"
-              value={content}
+              value={description}
               onChange={this.onChangeInput}
             ></Form.Control>
           </Form.Group>

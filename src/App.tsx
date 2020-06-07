@@ -9,18 +9,20 @@ import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { connect } from "react-redux";
 import { IState } from "./models/State";
 import { TodosPage } from "./components/TodosPage";
+import { loginReturningUserAction } from "./actions/userActions";
 
 interface AppProps {
   isLoggedIn: boolean;
   isLoading: boolean;
+  loginReturningUser(): void;
 }
 
 class _App extends React.PureComponent<AppProps> {
   render() {
     const { isLoading, isLoggedIn } = this.props;
 
-    if (isLoading) {
-      return <Redirect to="/todos" />;
+    if (!isLoggedIn) {
+      this.handleReturningUser();
     }
 
     return (
@@ -31,8 +33,8 @@ class _App extends React.PureComponent<AppProps> {
             <Register />
           </Route>
 
-          <PrivateRoute isLoggedIn={true} path="/todos">
-            <TodosPage/>
+          <PrivateRoute isLoggedIn={isLoggedIn} path="/todos">
+            <TodosPage />
           </PrivateRoute>
 
           <Route exact path="/">
@@ -44,6 +46,12 @@ class _App extends React.PureComponent<AppProps> {
       </Container>
     );
   }
+
+  handleReturningUser = () => {
+    const { loginReturningUser } = this.props;
+
+    loginReturningUser();
+  };
 }
 
 const mapStateToProps = (state: IState) => {
@@ -53,6 +61,10 @@ const mapStateToProps = (state: IState) => {
   };
 };
 
-const App = connect(mapStateToProps)(_App);
+const mapDispatchToProps = {
+  loginReturningUser: loginReturningUserAction,
+};
+
+const App = connect(mapStateToProps, mapDispatchToProps)(_App);
 
 export default App;

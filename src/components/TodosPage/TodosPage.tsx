@@ -10,20 +10,20 @@ interface TodosPageProps {
 export class _TodosPage extends PureComponent<TodosPageProps> {
   state = {
     date: new Date(),
-    content: "",
+    description: "",
   };
 
   render() {
     const { username, todos } = this.props;
-    const { date, content } = this.state;
+    const { date, description } = this.state;
 
     return (
       <div>
-        <Header>Welcome back, {username}</Header>
+        <Header>Welcome back, {username}!</Header>
 
         <TodoForm
           date={date}
-          content={content}
+          description={description}
           handleDateChange={this.handleDateChange}
           handleInputChange={this.handleInputChange}
         />
@@ -36,8 +36,8 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
   };
 
   handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const content = event.currentTarget.value;
+    const description = event.currentTarget.value;
 
-    this.setState({ content });
+    this.setState({ description });
   };
 }

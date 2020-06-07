@@ -1,9 +1,11 @@
 import React, { PureComponent } from "react";
 import { Header } from "../Header/Header";
 import GenericForm from "../GenericForm/GenericForm";
+import { Redirect } from "react-router-dom";
 
 interface LoginProps {
   loginUser(username: string, password: string): void;
+  isLoggedIn: boolean;
 }
 export class _Login extends PureComponent<LoginProps> {
   state = {
@@ -13,6 +15,11 @@ export class _Login extends PureComponent<LoginProps> {
 
   render() {
     const { username, password } = this.state;
+    const { isLoggedIn } = this.props;
+
+    if (isLoggedIn) {
+      return <Redirect to="/todos" />;
+    }
 
     return (
       <div>

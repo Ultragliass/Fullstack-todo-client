@@ -5,11 +5,24 @@ import { Actions } from "../redux/reducer";
 
 const BASE_LINK: string = "http://localhost:3001";
 
+export const loginReturningUserAction = (): Function | void => {
+  if (!localStorage.getItem("token")) {
+    return;
+  }
+
+  return (dispatch: Dispatch<IAction>) => {
+    dispatch({
+      type: Actions.loginUser,
+      payload: {},
+    });
+  };
+};
+
 export const loginUserAction = (
   username: string,
   password: string
 ): Function => {
-  return async (dispatch: Dispatch<IAction>) => {
+  return async (dispatch: Dispatch<IAction>): Promise<void> => {
     try {
       dispatch({
         type: Actions.showLoading,
@@ -22,8 +35,6 @@ export const loginUserAction = (
       });
 
       const { token } = response.data;
-
-      console.log({ token });
 
       localStorage.setItem("token", token);
 
@@ -48,7 +59,7 @@ export const registerUserAction = (
   username: string,
   password: string
 ): Function => {
-  return async (dispatch: Dispatch<IAction>) => {
+  return async (dispatch: Dispatch<IAction>): Promise<void> => {
     try {
       dispatch({
         type: Actions.showLoading,
@@ -62,9 +73,7 @@ export const registerUserAction = (
 
       const { token } = response.data;
 
-      console.log(token);
-
-      //localStorage.setItem("token", token);
+      localStorage.setItem("token", token);
 
       dispatch({
         type: Actions.loginUser,
