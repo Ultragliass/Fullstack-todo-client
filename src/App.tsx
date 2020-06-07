@@ -10,7 +10,11 @@ class App extends React.PureComponent {
     return (
       <Container className="container">
         <Switch>
-          <Route path="/">
+          <Route path="/register">
+            
+          </Route>
+
+          <Route exact path="/">
             <Login />
           </Route>
 

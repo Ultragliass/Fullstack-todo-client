@@ -23,7 +23,9 @@ export const loginUserAction = (
 
       const { token } = response.data;
 
-      localStorage.setItem("token", token);
+      console.log({ token });
+
+      //localStorage.setItem("token", token);
 
       dispatch({
         type: Actions.loginUser,
@@ -31,6 +33,8 @@ export const loginUserAction = (
       });
     } catch (err) {
       const error = err.response.data.msg;
+
+      console.log({ error });
 
       dispatch({
         type: Actions.showError,
@@ -60,7 +64,7 @@ export const registerUserAction = (
 
       const { token } = response.data;
 
-      localStorage.setItem("token", token);
+      //localStorage.setItem("token", token);
 
       dispatch({
         type: Actions.loginUser,
