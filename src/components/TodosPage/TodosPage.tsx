@@ -6,6 +6,7 @@ import TodoForm from "../TodoForm/TodoForm";
 interface TodosPageProps {
   username: string | null;
   todos: Todo[];
+  getUserData(): void;
 }
 export class _TodosPage extends PureComponent<TodosPageProps> {
   state = {
@@ -40,4 +41,9 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
 
     this.setState({ description });
   };
+
+  componentDidMount() {
+    const { getUserData } = this.props;
+    getUserData();
+  }
 }

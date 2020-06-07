@@ -6,11 +6,11 @@ import { Actions } from "../redux/reducer";
 const BASE_LINK: string = "http://localhost:3001";
 
 export const loginReturningUserAction = (): Function | void => {
-  if (!localStorage.getItem("token")) {
-    return;
-  }
-
   return (dispatch: Dispatch<IAction>) => {
+    if (!localStorage.getItem("token")) {
+      return;
+    }
+
     dispatch({
       type: Actions.loginUser,
       payload: {},
@@ -91,3 +91,36 @@ export const registerUserAction = (
     }
   };
 };
+
+export function getUserDataAction(): Function {
+  return async (dispatch: Dispatch<IAction>): Promise<void> => {
+    try {
+      dispatch({
+        type: Actions.showLoading,
+        payload: {},
+      });
+
+      const token = localStorage.getItem("token");
+
+      const response = await axios({
+        method: "GET",
+        url: `${BASE_LINK}/todos`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const { todos, username } = response.data.userData;
+
+      dispatch({
+        type: Actions.getUserData,
+        payload: {
+          todos,
+          username,
+        },
+      });
+    } catch (err) {
+      localStorage.removeItem("token");
+    }
+  };
+}

@@ -11,7 +11,7 @@ const initialState: IState = {
 
 export enum Actions {
   loginUser = "LOGIN_USER",
-  getUserDate = "GET_USER_DATA",
+  getUserData = "GET_USER_DATA",
   showError = "SHOW_ERROR",
   showLoading = "SHOW_LOADING",
 }
@@ -43,7 +43,7 @@ export const reducer = (state: IState = initialState, action: IAction) => {
       };
     }
 
-    case Actions.getUserDate: {
+    case Actions.getUserData: {
       const { todos, username } = action.payload;
 
       return {
