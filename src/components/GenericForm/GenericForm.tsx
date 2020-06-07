@@ -7,11 +7,14 @@ interface GenericFormProps {
   password: string;
   handleInputChange: Function;
   handleSubmit: Function;
+  buttonText: string;
+  pathText: string;
+  path: string;
 }
 
 export default class GenericForm extends PureComponent<GenericFormProps> {
   render() {
-    const { username, password } = this.props;
+    const { username, password, buttonText, path, pathText } = this.props;
 
     return (
       <Row className="justify-content-center pt-5">
@@ -43,11 +46,11 @@ export default class GenericForm extends PureComponent<GenericFormProps> {
                 type="submit"
                 className="form-control"
               >
-                Login
+                {buttonText}
               </Button>
 
-              <Link to="/register">
-                <p className="text-center">Not a user yet? Register!</p>
+              <Link to={path}>
+                <p className="text-center">{pathText}</p>
               </Link>
             </Form.Group>
           </Form>

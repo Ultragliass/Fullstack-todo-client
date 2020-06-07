@@ -23,6 +23,9 @@ export class _Login extends PureComponent<LoginProps> {
           password={password}
           handleInputChange={this.handleInputChange}
           handleSubmit={this.handleSubmit}
+          buttonText={"Login"}
+          pathText={"Not a user yet? Register!"}
+          path={"/register"}
         />
       </div>
     );
