@@ -1,25 +1,29 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, ChangeEvent, FormEvent } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 interface GenericFormProps {
-    username: string;
-    password: string;
-    handleInputChange: Function;
-    handleSubmit: Function;
+  username: string;
+  password: string;
+  handleInputChange: Function;
+  handleSubmit: Function;
 }
 
 export default class GenericForm extends PureComponent<GenericFormProps> {
   render() {
+    const { username, password } = this.props;
+
     return (
       <Row className="justify-content-center pt-5">
         <Col lg={3}>
-          <Form onSubmit={() => {}}>
+          <Form onSubmit={this.onSubmit}>
             <Form.Group>
               <Form.Control
                 type="text"
                 placeholder="Username"
                 name="username"
+                value={username}
+                onChange={this.onInputChange}
               />
             </Form.Group>
 
@@ -28,6 +32,8 @@ export default class GenericForm extends PureComponent<GenericFormProps> {
                 type="password"
                 placeholder="Password"
                 name="password"
+                value={password}
+                onChange={this.onInputChange}
               />
             </Form.Group>
 
@@ -49,4 +55,18 @@ export default class GenericForm extends PureComponent<GenericFormProps> {
       </Row>
     );
   }
+
+  onInputChange = (event: ChangeEvent) => {
+    const { handleInputChange } = this.props;
+
+    handleInputChange(event);
+  };
+
+  onSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    const { handleSubmit } = this.props;
+
+    handleSubmit(event);
+  };
 }
