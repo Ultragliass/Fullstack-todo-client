@@ -4,15 +4,28 @@ import "./App.css";
 import { Container } from "react-bootstrap";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Login } from "./components/Login";
+import { Register } from "./components/Register";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import { connect } from "react-redux";
+import { IState } from "./models/State";
 
-class App extends React.PureComponent {
+interface AppProps {
+  isLoggedIn: boolean;
+  isLoading: boolean;
+}
+
+class _App extends React.PureComponent<AppProps> {
   render() {
+    const {isLoading, isLoggedIn} = this.props;
+
     return (
       <Container className="container">
         <Switch>
           <Route path="/register">
-            
+            <Register />
           </Route>
+
+          <PrivateRoute isLoggedIn={isLoggedIn} path="/todos"></PrivateRoute>
 
           <Route exact path="/">
             <Login />
@@ -24,5 +37,14 @@ class App extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = (state: IState) => {
+  return {
+    isLoggedIn: state.isLoggedIn,
+    isLoading: state.isLoading,
+  };
+};
+
+const App = connect(mapStateToProps)(_App);
 
 export default App;

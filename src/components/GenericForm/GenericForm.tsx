@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 interface GenericFormProps {
   username: string;
   password: string;
-  handleInputChange: Function;
-  handleSubmit: Function;
+  handleInputChange(event: any): void;
+  handleSubmit(event: any): void;
   buttonText: string;
   pathText: string;
   path: string;

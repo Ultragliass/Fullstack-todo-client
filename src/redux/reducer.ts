@@ -20,25 +20,25 @@ export const reducer = (state: IState = initialState, action: IAction) => {
   switch (action.type) {
     case Actions.showError: {
       const { error } = action.payload;
-
+      
       return {
-        error,
         ...state,
+        error,
       };
     }
 
     case Actions.showLoading: {
       return {
-        isLoading: true,
         ...state,
+        isLoading: true,
       };
     }
 
     case Actions.loginUser: {
       return {
+        ...state,
         isLoggedIn: true,
         isLoading: false,
-        ...state,
       };
     }
 
@@ -46,10 +46,10 @@ export const reducer = (state: IState = initialState, action: IAction) => {
       const { todos, username } = action.payload;
 
       return {
+        ...state,
         todos,
         username,
         isLoading: false,
-        ...state,
       };
     }
 
