@@ -20,10 +20,11 @@ export const reducer = (state: IState = initialState, action: IAction) => {
   switch (action.type) {
     case Actions.showError: {
       const { error } = action.payload;
-      
+
       return {
         ...state,
         error,
+        isLoading: false,
       };
     }
 

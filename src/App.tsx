@@ -20,6 +20,7 @@ class _App extends React.PureComponent<AppProps> {
 
     return (
       <Container className="container">
+        {isLoading ? <div id="cover-spin"></div> : null}
         <Switch>
           <Route path="/register">
             <Register />
