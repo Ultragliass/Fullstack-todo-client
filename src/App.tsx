@@ -8,6 +8,7 @@ import { Register } from "./components/Register";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { connect } from "react-redux";
 import { IState } from "./models/State";
+import { TodosPage } from "./components/TodosPage";
 
 interface AppProps {
   isLoggedIn: boolean;
@@ -30,7 +31,9 @@ class _App extends React.PureComponent<AppProps> {
             <Register />
           </Route>
 
-          <PrivateRoute isLoggedIn={isLoggedIn} path="/todos"></PrivateRoute>
+          <PrivateRoute isLoggedIn={true} path="/todos">
+            <TodosPage/>
+          </PrivateRoute>
 
           <Route exact path="/">
             <Login />
