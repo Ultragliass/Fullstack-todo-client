@@ -16,7 +16,11 @@ interface AppProps {
 
 class _App extends React.PureComponent<AppProps> {
   render() {
-    const {isLoading, isLoggedIn} = this.props;
+    const { isLoading, isLoggedIn } = this.props;
+
+    if (isLoading) {
+      return <Redirect to="/todos" />;
+    }
 
     return (
       <Container className="container">
