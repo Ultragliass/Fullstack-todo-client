@@ -39,6 +39,8 @@ export const loginUserAction = (
         type: Actions.loginUser,
         payload: {},
       });
+
+      dismissError(dispatch);
     } catch (err) {
       showError(dispatch, err);
     }
@@ -66,6 +68,8 @@ export const registerUserAction = (
         type: Actions.loginUser,
         payload: {},
       });
+
+      dismissError(dispatch);
     } catch (err) {
       if (err.response.data.msg.includes("password")) {
         dispatch({
@@ -105,6 +109,8 @@ export function getUserDataAction(): Function {
           username,
         },
       });
+
+      dismissError(dispatch);
     } catch (err) {
       console.log(err.response.data);
       dispatch({
@@ -149,6 +155,15 @@ function showError(dispatch: Dispatch<IAction>, err: any): void {
     type: Actions.showError,
     payload: {
       error,
+    },
+  });
+}
+
+function dismissError(dispatch: Dispatch<IAction>): void {
+  dispatch({
+    type: Actions.showError,
+    payload: {
+      error: null,
     },
   });
 }

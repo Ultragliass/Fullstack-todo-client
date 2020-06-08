@@ -25,7 +25,7 @@ export default class TodoForm extends PureComponent<TodoFormProps> {
               <Form.Control
                 as="textarea"
                 rows={12}
-                placeholder="What do you need to do?"
+                placeholder="Description..."
                 value={description}
                 onChange={this.onChangeInput}
                 maxLength={500}
