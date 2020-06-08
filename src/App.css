@@ -70,3 +70,22 @@ textarea {
   top: 5px;
   right: 5px;
 }
+
+.toggle-complete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+  border: none;
+}
+
+.toggle-complete:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.icon {
+  height: 25px;
+  width: 25px;
+}

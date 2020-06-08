@@ -6,6 +6,7 @@ interface TodoProps {
   description: string;
   deadline: Date;
   complete: boolean;
+  toggleTodoComplete(id: number): void;
 }
 
 export class _Todo extends PureComponent<TodoProps> {
@@ -21,6 +22,17 @@ export class _Todo extends PureComponent<TodoProps> {
     return (
       <Col lg={4} className="mb-4">
         <Card className={complete ? "complete todo" : "todo"}>
+          <button
+            className="toggle-complete"
+            onClick={this.handleTodoCompleteToggle}
+          >
+            {complete ? (
+              <img src="/icons/reload.svg" alt="" className="icon" />
+            ) : (
+              <img src="/icons/check.svg" alt="" className="icon" />
+            )}
+          </button>
+
           <Card.Body>
             <Card.Text className="text-center">
               <h4>{formattedDeadline}</h4>
@@ -32,4 +44,10 @@ export class _Todo extends PureComponent<TodoProps> {
       </Col>
     );
   }
+
+  handleTodoCompleteToggle = () => {
+    const { toggleTodoComplete, id } = this.props;
+
+    toggleTodoComplete(id);
+  };
 }

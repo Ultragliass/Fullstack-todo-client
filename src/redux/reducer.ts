@@ -87,6 +87,7 @@ export const reducer = (state: IState = initialState, action: IAction) => {
       return {
         ...state,
         todos: modifiedTodos,
+        isLoading: false,
       };
     }
 
