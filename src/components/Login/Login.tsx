@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { Header } from "../Header/Header";
-import GenericForm from "../GenericForm/GenericForm";
+import { GenericForm } from "../GenericForm";
 import { Redirect } from "react-router-dom";
 
 interface LoginProps {

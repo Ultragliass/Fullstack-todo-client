@@ -10,9 +10,10 @@ interface GenericFormProps {
   buttonText: string;
   pathText: string;
   path: string;
+  dismissError(): void;
 }
 
-export default class GenericForm extends PureComponent<GenericFormProps> {
+export class _GenericForm extends PureComponent<GenericFormProps> {
   render() {
     const { username, password, buttonText, path, pathText } = this.props;
 
@@ -49,7 +50,7 @@ export default class GenericForm extends PureComponent<GenericFormProps> {
                 {buttonText}
               </Button>
 
-              <Link to={path}>
+              <Link to={path} onClick={this.handleDismissError}>
                 <p className="text-center">{pathText}</p>
               </Link>
             </Form.Group>
@@ -71,5 +72,11 @@ export default class GenericForm extends PureComponent<GenericFormProps> {
     const { handleSubmit } = this.props;
 
     handleSubmit(event);
+  };
+
+  handleDismissError = () => {
+    const { dismissError } = this.props;
+
+    dismissError();
   };
 }
