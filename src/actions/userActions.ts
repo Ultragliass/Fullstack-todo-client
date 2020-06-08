@@ -67,7 +67,16 @@ export const registerUserAction = (
         payload: {},
       });
     } catch (err) {
-      showError(dispatch, err);
+      if (err.response.data.msg.includes("password")) {
+        dispatch({
+          type: Actions.showError,
+          payload: {
+            error: "Password must be alphanumeric, at least 8 characters, 1 capital and lowercase letter.",
+          },
+        });
+      } else {
+        showError(dispatch, err);
+      }
     }
   };
 };
