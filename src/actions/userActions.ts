@@ -120,16 +120,12 @@ export function getUserDataAction(): Function {
         },
       });
     } catch (err) {
-      const error = err.response.data.msg;
+      localStorage.removeItem("token");
 
       dispatch({
-        type: Actions.showError,
-        payload: {
-          error,
-        },
+        type: Actions.logoutUser,
+        payload: {},
       });
-
-      localStorage.removeItem("token");
     }
   };
 }

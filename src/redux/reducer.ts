@@ -15,6 +15,7 @@ export enum Actions {
   showError = "SHOW_ERROR",
   showLoading = "SHOW_LOADING",
   addTodo = "ADD_TODO",
+  logoutUser = "LOGOUT_USER",
 }
 
 export const reducer = (state: IState = initialState, action: IAction) => {
@@ -71,6 +72,10 @@ export const reducer = (state: IState = initialState, action: IAction) => {
         todos: modifiedTodos,
         isLoading: false,
       };
+    }
+
+    case Actions.logoutUser: {
+      return initialState;
     }
 
     default: {
