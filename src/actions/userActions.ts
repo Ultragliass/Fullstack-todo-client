@@ -75,7 +75,8 @@ export const registerUserAction = (
         dispatch({
           type: Actions.showError,
           payload: {
-            error: "Password must be alphanumeric, at least 8 characters, 1 capital and lowercase letter.",
+            error:
+              "Password must be alphanumeric, at least 8 characters, 1 capital and lowercase letter.",
           },
         });
       } else {

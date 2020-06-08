@@ -34,8 +34,12 @@ export class _Todo extends PureComponent<TodoProps> {
             )}
           </button>
 
-          <Button variant="danger" onClick={this.handleDeleteTodo} className="delete">
-              X
+          <Button
+            variant="danger"
+            onClick={this.handleDeleteTodo}
+            className="delete"
+          >
+            X
           </Button>
 
           <Card.Body>
