@@ -24,10 +24,7 @@ export const loginUserAction = (
 ): Function => {
   return async (dispatch: Dispatch<IAction>): Promise<void> => {
     try {
-      dispatch({
-        type: Actions.showLoading,
-        payload: {},
-      });
+      showLoading(dispatch);
 
       const response = await axios.post(`${BASE_LINK}/login`, {
         username,
@@ -45,12 +42,7 @@ export const loginUserAction = (
     } catch (err) {
       const error = err.response.data.msg;
 
-      dispatch({
-        type: Actions.showError,
-        payload: {
-          error,
-        },
-      });
+      showError(dispatch, error);
     }
   };
 };
@@ -61,10 +53,7 @@ export const registerUserAction = (
 ): Function => {
   return async (dispatch: Dispatch<IAction>): Promise<void> => {
     try {
-      dispatch({
-        type: Actions.showLoading,
-        payload: {},
-      });
+      showLoading(dispatch);
 
       const response = await axios.post(`${BASE_LINK}/register`, {
         username,
@@ -82,12 +71,7 @@ export const registerUserAction = (
     } catch (err) {
       const error = err.response.data.msg;
 
-      dispatch({
-        type: Actions.showError,
-        payload: {
-          error,
-        },
-      });
+      showError(dispatch, error);
     }
   };
 };
@@ -95,10 +79,7 @@ export const registerUserAction = (
 export function getUserDataAction(): Function {
   return async (dispatch: Dispatch<IAction>): Promise<void> => {
     try {
-      dispatch({
-        type: Actions.showLoading,
-        payload: {},
-      });
+      showLoading(dispatch);
 
       const token = localStorage.getItem("token");
 
@@ -135,4 +116,20 @@ export function logoutUserAction(): Function {
       payload: {},
     });
   };
+}
+
+function showLoading(dispatch: Dispatch<IAction>): void {
+  dispatch({
+    type: Actions.showLoading,
+    payload: {},
+  });
+}
+
+function showError(dispatch: Dispatch<IAction>, error: string): void {
+  dispatch({
+    type: Actions.showError,
+    payload: {
+      error,
+    },
+  });
 }

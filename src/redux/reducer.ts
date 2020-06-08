@@ -16,6 +16,7 @@ export enum Actions {
   showLoading = "SHOW_LOADING",
   addTodo = "ADD_TODO",
   logoutUser = "LOGOUT_USER",
+  toggleTodoComplete = "TOGGLE_TODO_COMPLEET",
 }
 
 export const reducer = (state: IState = initialState, action: IAction) => {
@@ -74,9 +75,24 @@ export const reducer = (state: IState = initialState, action: IAction) => {
       };
     }
 
+    case Actions.toggleTodoComplete: {
+      const { id } = action.payload;
+
+      const modifiedTodos = state.todos.slice();
+
+      const index = modifiedTodos.findIndex((todo) => id === todo.id);
+
+      modifiedTodos[index].complete = !modifiedTodos[index].complete;
+
+      return {
+        ...state,
+        todos: modifiedTodos,
+      };
+    }
+
     case Actions.logoutUser: {
       localStorage.removeItem("token");
-      
+
       return initialState;
     }
 
