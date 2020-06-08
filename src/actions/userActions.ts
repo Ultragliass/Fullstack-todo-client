@@ -97,6 +97,7 @@ export function getUserDataAction(): Function {
         },
       });
     } catch (err) {
+      console.log(err.response.data);
       dispatch({
         type: Actions.logoutUser,
         payload: {},
@@ -110,6 +111,17 @@ export function logoutUserAction(): Function {
     dispatch({
       type: Actions.logoutUser,
       payload: {},
+    });
+  };
+}
+
+export function dismissErrorAction(): Function {
+  return (dispatch: Dispatch<IAction>) => {
+    dispatch({
+      type: Actions.showError,
+      payload: {
+        error: null,
+      },
     });
   };
 }

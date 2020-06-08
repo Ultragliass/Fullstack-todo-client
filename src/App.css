@@ -98,3 +98,11 @@ textarea {
   height: 25px;
   width: 25px;
 }
+
+.error {
+  opacity: 0.7;
+  position: absolute;
+  z-index: 1;
+  top: 20%;
+  right: 15%;
+}

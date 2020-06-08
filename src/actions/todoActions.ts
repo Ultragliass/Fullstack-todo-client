@@ -5,18 +5,18 @@ import axios from "axios";
 
 const BASE_LINK: string = "http://localhost:3001/todos";
 
-const TOKEN = localStorage.getItem("token");
-
 export function addTodoAction(date: Date, description: String): Function {
   return async (dispatch: Dispatch<IAction>) => {
     try {
       showLoading(dispatch);
 
+      const token = localStorage.getItem("token");
+
       const response = await axios({
         method: "POST",
         url: BASE_LINK,
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
+          Authorization: `Bearer ${token}`,
         },
         data: {
           deadline: date,
@@ -34,6 +34,8 @@ export function addTodoAction(date: Date, description: String): Function {
           description,
         },
       });
+
+      dismissError(dispatch);
     } catch (err) {
       showError(dispatch, err);
     }
@@ -45,11 +47,13 @@ export function toggleTodoCompleteAction(id: number): Function {
     try {
       showLoading(dispatch);
 
+      const token = localStorage.getItem("token");
+
       await axios({
         method: "PUT",
         url: BASE_LINK,
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
+          Authorization: `Bearer ${token}`,
         },
         data: {
           todoId: id,
@@ -62,6 +66,8 @@ export function toggleTodoCompleteAction(id: number): Function {
           id,
         },
       });
+
+      dismissError(dispatch);
     } catch (err) {
       showError(dispatch, err);
     }
@@ -73,11 +79,13 @@ export function deleteTodoAction(id: number): Function {
     try {
       showLoading(dispatch);
 
+      const token = localStorage.getItem("token");
+
       await axios({
         method: "DELETE",
         url: BASE_LINK,
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
+          Authorization: `Bearer ${token}`,
         },
         data: {
           todoId: id,
@@ -90,6 +98,8 @@ export function deleteTodoAction(id: number): Function {
           id,
         },
       });
+
+      dismissError(dispatch);
     } catch (err) {
       showError(dispatch, err);
     }
@@ -110,6 +120,15 @@ function showError(dispatch: Dispatch<IAction>, err: any): void {
     type: Actions.showError,
     payload: {
       error,
+    },
+  });
+}
+
+function dismissError(dispatch: Dispatch<IAction>): void {
+  dispatch({
+    type: Actions.showError,
+    payload: {
+      error: null,
     },
   });
 }
