@@ -1,9 +1,13 @@
 import { connect } from "react-redux";
 import { _Todo } from "./Todo";
-import { toggleTodoCompleteAction } from "../../actions/todoActions";
+import {
+  toggleTodoCompleteAction,
+  deleteTodoAction,
+} from "../../actions/todoActions";
 
 const mapDispatchToProps = {
-    toggleTodoComplete: toggleTodoCompleteAction,
-}
+  toggleTodoComplete: toggleTodoCompleteAction,
+  deleteTodo: deleteTodoAction,
+};
 
 export const Todo = connect(null, mapDispatchToProps)(_Todo);

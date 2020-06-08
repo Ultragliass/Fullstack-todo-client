@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Col, Card } from "react-bootstrap";
+import { Col, Card, Button } from "react-bootstrap";
 
 interface TodoProps {
   id: number;
@@ -7,6 +7,7 @@ interface TodoProps {
   deadline: Date;
   complete: boolean;
   toggleTodoComplete(id: number): void;
+  deleteTodo(id: number): void;
 }
 
 export class _Todo extends PureComponent<TodoProps> {
@@ -33,6 +34,10 @@ export class _Todo extends PureComponent<TodoProps> {
             )}
           </button>
 
+          <Button variant="danger" onClick={this.handleDeleteTodo} className="delete">
+              X
+          </Button>
+
           <Card.Body>
             <Card.Text className="text-center">
               <h4>{formattedDeadline}</h4>
@@ -49,5 +54,11 @@ export class _Todo extends PureComponent<TodoProps> {
     const { toggleTodoComplete, id } = this.props;
 
     toggleTodoComplete(id);
+  };
+
+  handleDeleteTodo = () => {
+    const { deleteTodo, id } = this.props;
+
+    deleteTodo(id);
   };
 }
