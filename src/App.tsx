@@ -13,6 +13,7 @@ import {
   loginReturningUserAction,
   dismissErrorAction,
 } from "./actions/userActions";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 interface AppProps {
   isLoggedIn: boolean;
@@ -35,25 +36,60 @@ class _App extends React.PureComponent<AppProps> {
         {isLoading ? <div id="cover-spin"></div> : null}
 
         {error ? (
-          <Alert className="error" variant="danger" onClose={this.handleDismissError} dismissible>
-            <Alert.Heading className="text-center">Error!</Alert.Heading>
-            <p>{error}</p>
-          </Alert>
+          <CSSTransition
+            in={true}
+            appear={true}
+            timeout={500}
+            classNames="fade"
+          >
+            <Alert
+              className="error"
+              variant="danger"
+              onClose={this.handleDismissError}
+              dismissible
+            >
+              <Alert.Heading className="text-center">Error!</Alert.Heading>
+              <p>{error}</p>
+            </Alert>
+          </CSSTransition>
         ) : null}
         <Switch>
-          <Route path="/register">
-            <Register />
-          </Route>
+          <TransitionGroup>
+            <Route path="/register">
+              <CSSTransition
+                in={true}
+                appear={true}
+                timeout={500}
+                classNames="fade"
+              >
+                <Register />
+              </CSSTransition>
+            </Route>
 
-          <PrivateRoute isLoggedIn={isLoggedIn} path="/todos">
-            <TodosPage />
-          </PrivateRoute>
+            <PrivateRoute isLoggedIn={isLoggedIn} path="/todos">
+              <CSSTransition
+                in={true}
+                appear={true}
+                timeout={500}
+                classNames="fade"
+              >
+                <TodosPage />
+              </CSSTransition>
+            </PrivateRoute>
 
-          <Route exact path="/">
-            <Login />
-          </Route>
+            <Route exact path="/">
+              <CSSTransition
+                in={true}
+                appear={true}
+                timeout={500}
+                classNames="fade"
+              >
+                <Login />
+              </CSSTransition>
+            </Route>
 
-          <Redirect to="/" />
+            <Redirect to="/" />
+          </TransitionGroup>
         </Switch>
       </Container>
     );

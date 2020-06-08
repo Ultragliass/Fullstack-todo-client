@@ -9,8 +9,7 @@ body {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 1;
+  z-index: 2;
 }
 
 @-webkit-keyframes spin {
@@ -101,8 +100,39 @@ textarea {
 
 .error {
   opacity: 0.7;
-  position: absolute;
+  position: fixed;
   z-index: 1;
   top: 20%;
   right: 50px;
+}
+
+.fade-appear {
+  opacity: 0;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transition: opacity 500ms linear;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms linear;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms linear;
+}
+
+.fade-exit-done {
+  opacity: 0;
 }

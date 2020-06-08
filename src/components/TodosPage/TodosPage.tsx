@@ -4,6 +4,7 @@ import { Header } from "../Header/Header";
 import TodoForm from "../TodoForm/TodoForm";
 import { Todo } from "../Todo";
 import { Row, Button } from "react-bootstrap";
+import { CSSTransition } from "react-transition-group";
 
 interface TodosPageProps {
   username: string | null;
@@ -38,7 +39,16 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
           {!todos.length ? (
             <Header>Looks like you have no todos yet!</Header>
           ) : (
-            todos.map((todo) => <Todo key={todo.id} {...todo} />)
+            todos.map((todo) => (
+              <CSSTransition
+                in={true}
+                appear={true}
+                timeout={500}
+                classNames="fade"
+              >
+                <Todo key={todo.id} {...todo} />
+              </CSSTransition>
+            ))
           )}
         </Row>
 
