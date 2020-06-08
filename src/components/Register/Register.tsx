@@ -18,7 +18,7 @@ export class _Register extends PureComponent<RegisterProps> {
     const { isLoggedIn } = this.props;
 
     if (isLoggedIn) {
-      return <Redirect to="/todo" />;
+      return <Redirect to="/todos" />;
     }
 
     return (

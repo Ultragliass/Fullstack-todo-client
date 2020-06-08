@@ -90,6 +90,7 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
 
   componentDidMount() {
     const { getUserData } = this.props;
+    console.log("Mounted.")
     getUserData();
   }
 }
