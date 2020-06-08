@@ -1,4 +1,4 @@
-import React, { PureComponent, ChangeEvent } from "react";
+import React, { PureComponent, ChangeEvent, FormEvent } from "react";
 import { Row, Form, Button, Col } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -8,6 +8,7 @@ interface TodoFormProps {
   description: string;
   handleDateChange(date: Date): void;
   handleInputChange(event: any): void;
+  handleFormSubmit(event: any): void;
 }
 
 export default class TodoForm extends PureComponent<TodoFormProps> {
@@ -17,21 +18,23 @@ export default class TodoForm extends PureComponent<TodoFormProps> {
     return (
       <Row className="justify-content-center pt-5">
         <Col lg={4}>
-          <Form.Group>
-            <Calendar value={date} onChange={this.onChangeDate} />
+          <Form onSubmit={this.onFormSubmit}>
+            <Form.Group>
+              <Calendar value={date} onChange={this.onChangeDate} />
 
-            <Form.Control
-              as="textarea"
-              rows={12}
-              placeholder="What do you need to do?"
-              value={description}
-              onChange={this.onChangeInput}
-            ></Form.Control>
-          </Form.Group>
+              <Form.Control
+                as="textarea"
+                rows={12}
+                placeholder="What do you need to do?"
+                value={description}
+                onChange={this.onChangeInput}
+              ></Form.Control>
+            </Form.Group>
 
-          <Button type="submit" variant="success" className="form-control">
-            Add Task
-          </Button>
+            <Button type="submit" variant="success" className="form-control">
+              Add Task
+            </Button>
+          </Form>
         </Col>
       </Row>
     );
@@ -47,5 +50,13 @@ export default class TodoForm extends PureComponent<TodoFormProps> {
     const { handleInputChange } = this.props;
 
     handleInputChange(event);
+  };
+
+  onFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    const { handleFormSubmit } = this.props;
+
+    handleFormSubmit(event);
   };
 }

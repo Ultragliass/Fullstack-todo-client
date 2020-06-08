@@ -14,6 +14,7 @@ export enum Actions {
   getUserData = "GET_USER_DATA",
   showError = "SHOW_ERROR",
   showLoading = "SHOW_LOADING",
+  addTodo = "ADD_TODO",
 }
 
 export const reducer = (state: IState = initialState, action: IAction) => {
@@ -50,6 +51,24 @@ export const reducer = (state: IState = initialState, action: IAction) => {
         ...state,
         todos,
         username,
+        isLoading: false,
+      };
+    }
+
+    case Actions.addTodo: {
+      const { id, deadline, description }: any = action.payload;
+      const modifiedTodos = state.todos.slice();
+
+      modifiedTodos.push({
+        id,
+        deadline,
+        description,
+        complete: false,
+      });
+
+      return {
+        ...state,
+        todos: modifiedTodos,
         isLoading: false,
       };
     }

@@ -7,6 +7,7 @@ interface TodosPageProps {
   username: string | null;
   todos: Todo[];
   getUserData(): void;
+  addTodo(date: Date, description: string): void;
 }
 export class _TodosPage extends PureComponent<TodosPageProps> {
   state = {
@@ -27,6 +28,7 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
           description={description}
           handleDateChange={this.handleDateChange}
           handleInputChange={this.handleInputChange}
+          handleFormSubmit={this.handleFormSubmit}
         />
       </div>
     );
@@ -41,6 +43,15 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
 
     this.setState({ description });
   };
+
+  handleFormSubmit = (event: Event) => {
+    event.preventDefault();
+
+    const {date, description} = this.state;
+    const {addTodo} = this.props;
+
+    addTodo(date, description);
+  }
 
   componentDidMount() {
     const { getUserData } = this.props;
