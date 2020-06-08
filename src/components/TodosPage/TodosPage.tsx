@@ -3,13 +3,14 @@ import { Todo as ITodo } from "../../models/Todo";
 import { Header } from "../Header/Header";
 import TodoForm from "../TodoForm/TodoForm";
 import { Todo } from "../Todo";
-import { Row } from "react-bootstrap";
+import { Row, Button } from "react-bootstrap";
 
 interface TodosPageProps {
   username: string | null;
   todos: ITodo[];
   getUserData(): void;
   addTodo(date: Date, description: string): void;
+  logoutUser(): void;
 }
 export class _TodosPage extends PureComponent<TodosPageProps> {
   state = {
@@ -32,7 +33,7 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
           handleInputChange={this.handleInputChange}
           handleFormSubmit={this.handleFormSubmit}
         />
-        
+
         <Row className="justify-content-center">
           {!todos.length ? (
             <Header>Looks like you have no todos yet!</Header>
@@ -40,6 +41,14 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
             todos.map((todo) => <Todo key={todo.id} {...todo} />)
           )}
         </Row>
+
+        <Button
+          variant="danger"
+          className="user-logout"
+          onClick={this.handleUserLogout}
+        >
+          Logout
+        </Button>
       </div>
     );
   }
@@ -61,6 +70,12 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
     const { addTodo } = this.props;
 
     addTodo(date, description);
+  };
+
+  handleUserLogout = () => {
+    const { logoutUser } = this.props;
+
+    logoutUser();
   };
 
   componentDidMount() {

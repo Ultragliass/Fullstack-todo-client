@@ -120,8 +120,6 @@ export function getUserDataAction(): Function {
         },
       });
     } catch (err) {
-      localStorage.removeItem("token");
-
       dispatch({
         type: Actions.logoutUser,
         payload: {},
@@ -130,7 +128,7 @@ export function getUserDataAction(): Function {
   };
 }
 
-export function logoutUser(): Function {
+export function logoutUserAction(): Function {
   return (dispatch: Dispatch<IAction>) => {
     dispatch({
       type: Actions.logoutUser,

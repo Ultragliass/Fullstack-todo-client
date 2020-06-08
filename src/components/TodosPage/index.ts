@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { _TodosPage } from "./TodosPage";
 import { IState } from "../../models/State";
-import { getUserDataAction } from "../../actions/userActions";
+import { getUserDataAction, logoutUserAction } from "../../actions/userActions";
 import { addTodoAction } from "../../actions/todoActions";
 
 const mapStateToProps = (state: IState) => {
@@ -14,6 +14,7 @@ const mapStateToProps = (state: IState) => {
 const mapDispatchToProps = {
   getUserData: getUserDataAction,
   addTodo: addTodoAction,
+  logoutUser: logoutUserAction,
 };
 
 export const TodosPage = connect(

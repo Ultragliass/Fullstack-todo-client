@@ -64,3 +64,9 @@ textarea {
 .todo {
   min-height: 300px;
 }
+
+.user-logout {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

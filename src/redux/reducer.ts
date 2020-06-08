@@ -75,6 +75,8 @@ export const reducer = (state: IState = initialState, action: IAction) => {
     }
 
     case Actions.logoutUser: {
+      localStorage.removeItem("token");
+      
       return initialState;
     }
 
