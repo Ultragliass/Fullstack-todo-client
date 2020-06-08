@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
-import { Todo } from "../../models/Todo";
+import { Todo as ITodo } from "../../models/Todo";
 import { Header } from "../Header/Header";
 import TodoForm from "../TodoForm/TodoForm";
+import { Todo } from "../Todo";
+import { Row } from "react-bootstrap";
 
 interface TodosPageProps {
   username: string | null;
-  todos: Todo[];
+  todos: ITodo[];
   getUserData(): void;
   addTodo(date: Date, description: string): void;
 }
@@ -30,6 +32,14 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
           handleInputChange={this.handleInputChange}
           handleFormSubmit={this.handleFormSubmit}
         />
+        
+        <Row className="justify-content-center">
+          {!todos.length ? (
+            <Header>Looks like you have no todos yet!</Header>
+          ) : (
+            todos.map((todo) => <Todo key={todo.id} {...todo} />)
+          )}
+        </Row>
       </div>
     );
   }
@@ -47,11 +57,11 @@ export class _TodosPage extends PureComponent<TodosPageProps> {
   handleFormSubmit = (event: Event) => {
     event.preventDefault();
 
-    const {date, description} = this.state;
-    const {addTodo} = this.props;
+    const { date, description } = this.state;
+    const { addTodo } = this.props;
 
     addTodo(date, description);
-  }
+  };
 
   componentDidMount() {
     const { getUserData } = this.props;

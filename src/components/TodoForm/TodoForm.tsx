@@ -16,7 +16,7 @@ export default class TodoForm extends PureComponent<TodoFormProps> {
     const { date, description } = this.props;
 
     return (
-      <Row className="justify-content-center pt-5">
+      <Row className="justify-content-center pt-5 pb-5">
         <Col lg={4}>
           <Form onSubmit={this.onFormSubmit}>
             <Form.Group>
@@ -28,6 +28,7 @@ export default class TodoForm extends PureComponent<TodoFormProps> {
                 placeholder="What do you need to do?"
                 value={description}
                 onChange={this.onChangeInput}
+                maxLength={500}
               ></Form.Control>
             </Form.Group>
 

@@ -47,3 +47,16 @@ body {
   -webkit-animation: spin 0.8s linear infinite;
   animation: spin 0.8s linear infinite;
 }
+
+.complete {
+  border: 1px solid green;
+}
+
+textarea {
+  resize: none;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid lightgray;
+}
