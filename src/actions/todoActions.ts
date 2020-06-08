@@ -5,18 +5,18 @@ import axios from "axios";
 
 const BASE_LINK: string = "http://localhost:3001/todos";
 
+const TOKEN = localStorage.getItem("token");
+
 export function addTodoAction(date: Date, description: String): Function {
   return async (dispatch: Dispatch<IAction>) => {
     try {
       showLoading(dispatch);
 
-      const token = localStorage.getItem("token");
-
       const response = await axios({
         method: "POST",
         url: BASE_LINK,
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
         data: {
           deadline: date,
@@ -35,9 +35,7 @@ export function addTodoAction(date: Date, description: String): Function {
         },
       });
     } catch (err) {
-      const error = err.response.data.msg;
-
-      showError(dispatch, error);
+      showError(dispatch, err);
     }
   };
 }
@@ -47,13 +45,11 @@ export function toggleTodoCompleteAction(id: number): Function {
     try {
       showLoading(dispatch);
 
-      const token = localStorage.getItem("token");
-
-      const response = axios({
+      await axios({
         method: "PUT",
         url: BASE_LINK,
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
         data: {
           todoId: id,
@@ -67,9 +63,35 @@ export function toggleTodoCompleteAction(id: number): Function {
         },
       });
     } catch (err) {
-        const error = err.response.data.msg;
+      showError(dispatch, err);
+    }
+  };
+}
 
-        showError(dispatch, error);
+export function deleteTodoAction(id: number): Function {
+  return async (dispatch: Dispatch<IAction>): Promise<void> => {
+    try {
+      showLoading(dispatch);
+
+      await axios({
+        method: "DELETE",
+        url: BASE_LINK,
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+        data: {
+          todoId: id,
+        },
+      });
+
+      dispatch({
+        type: Actions.deleteTodo,
+        payload: {
+          id,
+        },
+      });
+    } catch (err) {
+      showError(dispatch, err);
     }
   };
 }
@@ -81,7 +103,9 @@ function showLoading(dispatch: Dispatch<IAction>): void {
   });
 }
 
-function showError(dispatch: Dispatch<IAction>, error: string): void {
+function showError(dispatch: Dispatch<IAction>, err: any): void {
+  const error = err.response.data.msg;
+
   dispatch({
     type: Actions.showError,
     payload: {

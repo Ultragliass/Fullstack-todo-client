@@ -40,9 +40,7 @@ export const loginUserAction = (
         payload: {},
       });
     } catch (err) {
-      const error = err.response.data.msg;
-
-      showError(dispatch, error);
+      showError(dispatch, err);
     }
   };
 };
@@ -69,9 +67,7 @@ export const registerUserAction = (
         payload: {},
       });
     } catch (err) {
-      const error = err.response.data.msg;
-
-      showError(dispatch, error);
+      showError(dispatch, err);
     }
   };
 };
@@ -125,7 +121,9 @@ function showLoading(dispatch: Dispatch<IAction>): void {
   });
 }
 
-function showError(dispatch: Dispatch<IAction>, error: string): void {
+function showError(dispatch: Dispatch<IAction>, err: any): void {
+  const error = err.response.data.msg;
+
   dispatch({
     type: Actions.showError,
     payload: {
