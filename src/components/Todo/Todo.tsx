@@ -20,14 +20,13 @@ export class _Todo extends PureComponent<TodoProps> {
 
     return (
       <Col lg={4} className="mb-4">
-        <Card className={complete ? "complete" : undefined}>
+        <Card className={complete ? "complete todo" : "todo"}>
           <Card.Body>
             <Card.Text className="text-center">
               <h4>{formattedDeadline}</h4>
             </Card.Text>
             <hr />
             <Card.Text>{description}</Card.Text>
-            <hr />
           </Card.Body>
         </Card>
       </Col>

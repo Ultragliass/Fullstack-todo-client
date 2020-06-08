@@ -5,7 +5,7 @@ import { Actions } from "../redux/reducer";
 
 const BASE_LINK: string = "http://localhost:3001";
 
-export const loginReturningUserAction = (): Function | void => {
+export const loginReturningUserAction = (): Function => {
   return (dispatch: Dispatch<IAction>) => {
     if (!localStorage.getItem("token")) {
       return;
@@ -127,5 +127,14 @@ export function getUserDataAction(): Function {
         payload: {},
       });
     }
+  };
+}
+
+export function logoutUser(): Function {
+  return (dispatch: Dispatch<IAction>) => {
+    dispatch({
+      type: Actions.logoutUser,
+      payload: {},
+    });
   };
 }

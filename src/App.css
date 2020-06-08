@@ -49,7 +49,7 @@ body {
 }
 
 .complete {
-  border: 1px solid green;
+  border: 3px solid green;
 }
 
 textarea {
@@ -59,4 +59,8 @@ textarea {
 .form-control:focus {
   box-shadow: none;
   border: 1px solid lightgray;
+}
+
+.todo {
+  min-height: 300px;
 }
