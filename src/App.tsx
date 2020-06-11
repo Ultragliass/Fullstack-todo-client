@@ -27,10 +27,6 @@ class _App extends React.PureComponent<AppProps> {
   render() {
     const { isLoading, isLoggedIn, error } = this.props;
 
-    if (!isLoggedIn) {
-      this.handleReturningUser();
-    }
-
     return (
       <Container className="container">
         {isLoading ? <div id="cover-spin"></div> : null}
@@ -94,6 +90,10 @@ class _App extends React.PureComponent<AppProps> {
       </Container>
     );
   }
+
+  componentDidMount = () => {
+    this.handleReturningUser();
+  };
 
   handleReturningUser = () => {
     const { loginReturningUser } = this.props;
