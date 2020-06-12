@@ -113,7 +113,6 @@ export function getUserDataAction(): Function {
 
       dismissError(dispatch);
     } catch (err) {
-      console.log(err.response.data);
       dispatch({
         type: Actions.logoutUser,
         payload: {},
