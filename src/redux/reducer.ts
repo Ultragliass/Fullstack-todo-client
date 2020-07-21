@@ -59,7 +59,7 @@ export const reducer = (state: IState = initialState, action: IAction) => {
     }
 
     case Actions.addTodo: {
-      const { id, deadline, description }: any = action.payload;
+      const { id, deadline, description } = action.payload;
       const modifiedTodos = state.todos.slice();
 
       modifiedTodos.push({
